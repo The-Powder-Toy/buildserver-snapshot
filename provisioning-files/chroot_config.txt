@@ -1,0 +1,7 @@
+[precise]
+description=Ubuntu Precise
+directory=/var/chroot
+personality=linux32
+users=vagrant
+groups=sbuild
+root-groups=root

@@ -1,0 +1,8 @@
+.vagrant
+files
+output
+temp
+VMs
+source/The-Powder-Toy
+source/Jacob1sMod
+*.sdk.tar.bz2

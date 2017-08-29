@@ -1,0 +1,50 @@
+diff --git a/dmg/dmglib.c b/dmg/dmglib.c
+index 4548576..149b007 100644
+--- a/dmg/dmglib.c
++++ b/dmg/dmglib.c
+@@ -227,17 +227,17 @@ int buildDmg(AbstractFile* abstractIn, AbstractFile* abstractOut) {
+ 	koly.fUDIFSegmentID.data2 = rand();
+ 	koly.fUDIFSegmentID.data3 = rand();
+ 	koly.fUDIFSegmentID.data4 = rand();
+-	koly.fUDIFDataForkChecksum.type = CHECKSUM_UDIF_CRC32;
+-	koly.fUDIFDataForkChecksum.bitness = checksumBitness(CHECKSUM_UDIF_CRC32);
++	koly.fUDIFDataForkChecksum.type = CHECKSUM_NONE;
++	koly.fUDIFDataForkChecksum.bitness = checksumBitness(CHECKSUM_NONE);
+ 	koly.fUDIFDataForkChecksum.data[0] = dataForkChecksum;
+ 	koly.fUDIFXMLOffset = plistOffset;
+ 	koly.fUDIFXMLLength = plistSize;
+ 	memset(&(koly.reserved1), 0, 0x78);
+ 	
+-	koly.fUDIFMasterChecksum.type = CHECKSUM_UDIF_CRC32;
+-	koly.fUDIFMasterChecksum.bitness = checksumBitness(CHECKSUM_UDIF_CRC32);
++	koly.fUDIFMasterChecksum.type = CHECKSUM_NONE;
++	koly.fUDIFMasterChecksum.bitness = checksumBitness(CHECKSUM_NONE);
+ 	koly.fUDIFMasterChecksum.data[0] = calculateMasterChecksum(resources);
+-	printf("Master checksum: %x\n", koly.fUDIFMasterChecksum.data[0]); fflush(stdout); 
++	//printf("Master checksum: %x\n", koly.fUDIFMasterChecksum.data[0]); fflush(stdout); 
+ 	
+ 	koly.fUDIFImageVariant = kUDIFDeviceImageType;
+ 	koly.fUDIFSectorCount = EXTRA_SIZE + (volumeHeader->totalBlocks * volumeHeader->blockSize)/SECTOR_SIZE;
+@@ -444,17 +444,17 @@ int convertToDMG(AbstractFile* abstractIn, AbstractFile* abstractOut) {
+ 	koly.fUDIFSegmentID.data2 = rand();
+ 	koly.fUDIFSegmentID.data3 = rand();
+ 	koly.fUDIFSegmentID.data4 = rand();
+-	koly.fUDIFDataForkChecksum.type = CHECKSUM_UDIF_CRC32;
+-	koly.fUDIFDataForkChecksum.bitness = checksumBitness(CHECKSUM_UDIF_CRC32);
++	koly.fUDIFDataForkChecksum.type = CHECKSUM_NONE;
++	koly.fUDIFDataForkChecksum.bitness = checksumBitness(CHECKSUM_NONE);
+ 	koly.fUDIFDataForkChecksum.data[0] = dataForkChecksum;
+ 	koly.fUDIFXMLOffset = plistOffset;
+ 	koly.fUDIFXMLLength = plistSize;
+ 	memset(&(koly.reserved1), 0, 0x78);
+ 	
+-	koly.fUDIFMasterChecksum.type = CHECKSUM_UDIF_CRC32;
+-	koly.fUDIFMasterChecksum.bitness = checksumBitness(CHECKSUM_UDIF_CRC32);
++	koly.fUDIFMasterChecksum.type = CHECKSUM_NONE;
++	koly.fUDIFMasterChecksum.bitness = checksumBitness(CHECKSUM_NONE);
+ 	koly.fUDIFMasterChecksum.data[0] = calculateMasterChecksum(resources);
+-	printf("Master checksum: %x\n", koly.fUDIFMasterChecksum.data[0]); fflush(stdout); 
++	//printf("Master checksum: %x\n", koly.fUDIFMasterChecksum.data[0]); fflush(stdout); 
+ 	
+ 	koly.fUDIFSectorCount = numSectors;
+ 	koly.reserved2 = 0;
