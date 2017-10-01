@@ -214,6 +214,30 @@ lua52_install()
 	return $result
 }
 
+luajit_url="http://luajit.org/download/LuaJIT-2.0.5.tar.gz"
+luajit_md5="48353202cbcacab84ee41a5a70ea0a2c"
+luajit_filename="LuaJIT-2.0.5.tar.gz"
+luajit_folder="/LuaJIT-2.0.5"
+luajit_extractfolder="tpt-libs"
+luajit_compile()
+{
+	pushd $1/src > /dev/null
+	$MAKE TARGET_SYS=Darwin HOST_CC="gcc" CC="clang"\
+	CROSS="$CROSS_BIN_PREFIX" LUAJIT_SO=
+	result=$?
+	popd > /dev/null
+	return $result
+}
+luajit_install()
+{
+	pushd $1 > /dev/null
+	$MAKE install TARGET_SYS=Darwin PREFIX="$CROSS_INSTALL_DIR"\
+	HOST_CC="gcc" CC="clang" CROSS="$CROSS_BIN_PREFIX"
+	result=$?
+	popd > /dev/null
+	return $result
+}
+
 
 echo_usage()
 {
@@ -227,7 +251,7 @@ echo_usage()
     \033[1m"${0}"\033[m make \033[4mLIBRARY_NAME\033[m...
     \033[1msudo "${0}"\033[m install \033[4mLIBRARY_NAME\033[m...
     
-  Valid LIBRARY_NAMEs are: \033[1msdl fftw lua lua52\033[m
+  Valid LIBRARY_NAMEs are: \033[1msdl fftw lua lua52 luajit\033[m
 \n"
 }
 

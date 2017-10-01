@@ -5,7 +5,7 @@ mv ../source/The-Powder-Toy/*.log /c/StarHTTP/TPT/Download/Output
 mv *.log /c/StarHTTP/TPT/Download/Output
 logsexist=$?
 if [ $logsexist -ne 0 ]; then
-	echo "msg ##jacob1 Changelogs changed" | ../nc.exe -w 1 localhost 9876
+	echo "msg #powder-dev Changelogs changed" | ../nc.exe -w 1 localhost 9876
 	exit 0
 fi
 
@@ -20,7 +20,7 @@ success=$?
 popd
 
 if [ $success -ne 0 ]; then
-	echo "msg ##jacob1 Moving update files failed" | ./nc.exe -w 1 localhost 9876
+	echo "msg #powder-dev Moving update files failed" | ./nc.exe -w 1 localhost 9876
 else
 	echo "msg #powder-dev Snapshot update $1 released!" | ./nc.exe -w 1 localhost 9876
 fi

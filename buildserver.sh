@@ -1,7 +1,7 @@
 #!/bin/sh
 
 sudo apt-get update
-sudo apt-get install -y build-essential git scons cmake pkg-config libssl0.9.8 ccache mingw32 mingw32-binutils mingw32-runtime zip unzip libx11-dev libxext-dev libssl-dev libreadline-dev libncurses5-dev schroot debootstrap tofrodos genisoimage
+sudo apt-get install -y build-essential git scons cmake pkg-config libssl0.9.8 ccache mingw32 mingw32-binutils mingw32-runtime zip unzip libc6-dev-i386 libx11-dev libxext-dev libssl-dev libreadline-dev libncurses5-dev schroot debootstrap tofrodos genisoimage
 
 cp -r /vagrant/provisioning-files/* .
 
@@ -23,15 +23,15 @@ sudo chown vagrant -R /var/chroot/home/vagrant
 # 64 bit linux
 cd linux-libs
 chmod +x linux-libs.sh
-./linux-libs.sh make bzip2 fftw lua lua52 sdl zlib
-sudo ./linux-libs.sh install bzip2 fftw lua lua52 sdl zlib
+./linux-libs.sh make bzip2 fftw lua lua52 luajit sdl zlib
+sudo ./linux-libs.sh install bzip2 fftw lua lua52 luajit sdl zlib
 cd ..
 
 # Windows
 cd cross-libs
 chmod +x cross-libs.sh
-./cross-libs.sh make bzip2 fftw lua lua52 pthread regex sdl zlib
-sudo ./cross-libs.sh install bzip2 fftw lua lua52 pthread regex sdl zlib
+./cross-libs.sh make bzip2 fftw lua lua52 luajit pthread regex sdl zlib
+sudo ./cross-libs.sh install bzip2 fftw lua lua52 luajit pthread regex sdl zlib
 cd ..
 
 # OS X
@@ -45,8 +45,8 @@ cp ../MacOSX10.7.sdk.tar.bz2 tarballs
 SDK_VERSION=10.7 OSX_VERSION_MIN=10.6 UNATTENDED=1 ./build.sh
 cd ..
 PATH=$PATH:/home/vagrant/mac/osxcross/target/bin
-./cross-libs.sh make sdl fftw lua lua52
-sudo ./cross-libs.sh install sdl fftw lua lua52
+./cross-libs.sh make sdl fftw lua lua52 luajit
+sudo ./cross-libs.sh install sdl fftw lua lua52 luajit
 git clone https://github.com/hamstergene/libdmg-hfsplus.git
 mv nochecksumpatch libdmg-hfsplus
 cd libdmg-hfsplus/

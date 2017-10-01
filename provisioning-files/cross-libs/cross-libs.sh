@@ -321,16 +321,16 @@ lua52_install()
 	return $result
 }
 
-luajit_url="http://luajit.org/download/LuaJIT-2.0.4.tar.gz"
-luajit_md5="dd9c38307f2223a504cbfb96e477eca0"
-luajit_filename="LuaJIT-2.0.4.tar.gz"
-luajit_folder="/LuaJIT-2.0.4"
+luajit_url="http://luajit.org/download/LuaJIT-2.0.5.tar.gz"
+luajit_md5="48353202cbcacab84ee41a5a70ea0a2c"
+luajit_filename="LuaJIT-2.0.5.tar.gz"
+luajit_folder="/LuaJIT-2.0.5"
 luajit_extractfolder="tpt-libs"
 luajit_compile()
 {
 	pushd $1/src > /dev/null
 	$MAKE CROSS=$MINGW_BIN_PREFIX TARGET_SYS=Windows\
-	HOST_CC="gcc -m32" libluajit.a luajit.exe
+	HOST_CC="gcc -m32" libluajit.a
 	result=$?
 	popd > /dev/null
 	return $result
@@ -380,7 +380,7 @@ echo_usage()
     \033[1m"${0}"\033[m make \033[4mLIBRARY_NAME\033[m...
     \033[1msudo "${0}"\033[m install \033[4mLIBRARY_NAME\033[m...
     
-  Valid LIBRARY_NAMEs are: \033[1mbzip2 fftw lua lua52 pthread regex sdl zlib\033[m
+  Valid LIBRARY_NAMEs are: \033[1mbzip2 fftw lua lua52 luajit pthread regex sdl zlib\033[m
 \n"
 }
 
