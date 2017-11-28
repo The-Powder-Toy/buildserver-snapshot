@@ -11,7 +11,7 @@ scons --clean
 
 export VER="$1"
 export CPPDEFINES="UPDATESERVER=\\\"starcatcher.us/TPT\\\""
-export COMPILE="scons --static --snapshot-id=$VER -j2 --luajit"
+export COMPILE="scons --static --snapshot-id=$VER -j2 --luajit --release"
 
 LIN32_compile()
 {

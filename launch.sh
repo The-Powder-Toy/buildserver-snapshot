@@ -15,10 +15,10 @@ export VAGRANT_HOME="C:\NotProgramFiles\vagrant\files"
 vagrant up
 if [ $mod -ne 0 ]; then
 	echo 1
-	vagrant ssh -c "pushd The-Powder-Toy/updatepackager && ./compile.sh $(cat args.txt) && ./packager.sh $(cat args.txt) && ./move.sh || (./move.sh && false)" > output.txt
+	vagrant ssh -c "pushd The-Powder-Toy/updatepackager && ./compile.sh $(cat args.txt) && ./packager.sh $(cat args.txt) && ./move.sh || (./move.sh && false)" >output.txt 2>&1
 else
 	echo 1
-	vagrant ssh -c "pushd Jacob1sMod/updatepackager && ./compile.sh $(cat args.txt) && ./packager.sh $(cat args.txt) && ./move.sh || (./move.sh && false)" > output.txt
+	vagrant ssh -c "pushd Jacob1sMod/updatepackager && ./compile.sh $(cat args.txt) && ./packager.sh $(cat args.txt) && ./move.sh || (./move.sh && false)" >output.txt 2>&1
 fi
 success=$?
 vagrant halt
@@ -36,14 +36,14 @@ if [ $success -ne 0 ]; then
 	fi
 else
 	if [ $mod -ne 0 ]; then
-		./compilemsvc.sh >> output.txt
+		./compilemsvc.sh >>output.txt 2>&1
 		if [ $? -ne 0 ]; then
 			cp source/The-Powder-Toy/*.log /c/StarHTTP/TPT/Download/Output
 			cp output.txt /c/StarHTTP/TPT/Download/Output/vagrantoutput.txt
 			echo "msg #powder-dev MSVC compile Failed, details at https://$URL/TPT/Download/Output" | ./nc.exe -w 1 localhost 9876
 			exit 1
 		fi
-		source/updatepackager/package.sh >> output.txt
+		source/updatepackager/package.sh >>output.txt 2>&1
 		if [ $? -ne 0 ]; then
 			cp source/The-Powder-Toy/*.log /c/StarHTTP/TPT/Download/Output
 			cp output.txt /c/StarHTTP/TPT/Download/Output/vagrantoutput.txt
@@ -52,14 +52,14 @@ else
 		fi
 		echo "msg #powder-dev Compile Succeeded (pending - https://$URL/TPT/changelog.lua)" | ./nc.exe -w 1 localhost 9876
 	else
-		./compilemsvcmod.sh >> output.txt
+		./compilemsvcmod.sh >>output.txt 2>&1
 		if [ $? -ne 0 ]; then
 			cp source/Jacob1sMod/*.log /c/StarHTTP/TPT/mod/Output
 			cp output.txt /c/StarHTTP/TPT/mod/Output/vagrantoutput.txt
 			echo "msg ##jacob1 MSVC compile Failed, details at https://$URL/TPT/mod/Output" | ./nc.exe -w 1 localhost 9876
 			exit 1
 		fi
-		source/updatepackager/packagemod.sh $(cat args.txt) >> output.txt
+		source/updatepackager/packagemod.sh $(cat args.txt) >>output.txt 2>&1
 		if [ $? -ne 0 ]; then
 			cp source/Jacob1sMod/*.log /c/StarHTTP/TPT/mod/Output
 			cp output.txt /c/StarHTTP/TPT/mod/Output/vagrantoutput.txt

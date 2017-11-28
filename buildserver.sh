@@ -32,6 +32,9 @@ cd cross-libs
 chmod +x cross-libs.sh
 ./cross-libs.sh make bzip2 fftw lua lua52 luajit pthread regex sdl zlib
 sudo ./cross-libs.sh install bzip2 fftw lua lua52 luajit pthread regex sdl zlib
+pushd /usr/lib/gcc/i586-mingw32msvc/4.2.1-sjlj/
+i586-mingw32msvc-ar -d libstdc++.a stubs.o
+popd
 cd ..
 
 # OS X
