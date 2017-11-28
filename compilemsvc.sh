@@ -14,7 +14,7 @@ if [ $? -eq 0 ]; then
 	echo "$(git rev-parse HEAD)" > latest_MSVC.log
 	/c/Python27/python.exe /c/Python27/Scripts/scons.py --clean
 	export VER=$(cat ../../args.txt | cut -d" " -f 1)
-	export COMPILE="env CPPDEFINES=UPDATESERVER=\\\"starcatcher.us/TPT\\\" /c/Python27/python.exe /c/Python27/Scripts/scons.py --msvc --static --luajit --snapshot-id=$VER -j2"
+	export COMPILE="env CPPDEFINES=UPDATESERVER=\\\"starcatcher.us/TPT\\\" /c/Python27/python.exe /c/Python27/Scripts/scons.py --msvc --static --luajit --release --snapshot-id=$VER -j2"
 	$COMPILE --win --builddir=build/MSVC 2> error_MSVC.log 1> output_MSVC.log
 	ret=$?
 	mv config.log config_MSVC.log
