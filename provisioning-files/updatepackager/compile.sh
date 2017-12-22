@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cd ..
-git pull
+git pull 2>/dev/null
 if test $? -ne 0; then
 	printf "Could not update source, exiting"
 	cd updatepackager
@@ -15,12 +15,12 @@ export COMPILE="scons --static --snapshot-id=$VER -j2 --luajit --release"
 
 LIN32_compile()
 {
-	schroot -c precise -d ~/The-Powder-Toy -- git pull
-	schroot -c precise -d ~/The-Powder-Toy -- scons --clean
+	schroot -c xenial -d ~/The-Powder-Toy -- "git pull 2>/dev/null"
+	schroot -c xenial -d ~/The-Powder-Toy -- scons --clean
 
 	export CCFLAGS="-static-libgcc -static-libstdc++"
 	export LINKFLAGS="-static-libgcc -static-libstdc++"
-	schroot -c precise -d ~/The-Powder-Toy -p -- $COMPILE --32bit --builddir=build/$1 2> error_$1.log 1> output_$1.log
+	schroot -c xenial -d ~/The-Powder-Toy -p -- $COMPILE --32bit --builddir=build/$1 2> error_$1.log 1> output_$1.log
 }
 
 LIN64_compile()
@@ -42,7 +42,7 @@ MACOSX_compile()
 	export CCFLAGS=
 	export LINKFLAGS=
 	OLDPATH=$PATH
-	PATH=/home/vagrant/mac/osxcross/target/SDK/MacOSX10.7.sdk/usr/bin:/home/vagrant/mac/osxcross/target/bin:$PATH
+	PATH=~/mac/osxcross/target/SDK/MacOSX10.7.sdk/usr/bin:~/mac/osxcross/target/bin:$PATH
 	CC=o64-clang CXX=o64-clang++ STRIP=x86_64-apple-darwin11-strip $COMPILE --mac --builddir=build/$1 2> error_$1.log 1> output_$1.log
 	ret=$?
 	PATH=$OLDPATH

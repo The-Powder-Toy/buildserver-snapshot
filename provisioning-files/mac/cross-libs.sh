@@ -8,7 +8,7 @@ CROSS_BIN_PREFIX="x86_64-apple-darwin11-"
 # where to install the libraries
 # you'll probably want to set this to the location where all the existing MinGW bin/lib/include folders are
 CROSS_INSTALL_DIR="/home/vagrant/mac/osxcross/target/SDK/MacOSX10.7.sdk/usr"
-PATH=$PATH:/home/vagrant/mac/osxcross/target/bin
+PATH=$PATH:/home/ubuntu/mac/osxcross/target/bin
 
 
 #
@@ -60,7 +60,7 @@ make_lib()
 	fi
 	if test ! -f ${filename}; then
 		printf "\033[1m${filename} does not exist, downloading...\033[m\n"
-		wget -O "${filename}" "${url}"
+		wget -qO "${filename}" "${url}"
 		if test $? -ne 0; then
 			log_error "Unable to download ${url}"
 			return 1

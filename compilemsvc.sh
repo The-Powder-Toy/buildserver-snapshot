@@ -20,7 +20,7 @@ if [ $? -eq 0 ]; then
 	mv config.log config_MSVC.log
 	if test $ret -ne 0; then
 		echo "msg #powder-dev test1 please ignore" | ../../nc.exe -w 1 localhost 9876
-		if grep -Fxq "cannot update program database" output_MSVC.log; then
+		if ! grep -Fq "cannot update program database" output_MSVC.log; then
 			echo "msg #powder-dev msvc compiler fail, retrying" | ./nc.exe -w 1 localhost 9876
 			/c/Python27/python.exe /c/Python27/Scripts/scons.py --clean
 			$COMPILE --win --builddir=build/MSVC 2> error_MSVC.log 1> output_MSVC.log

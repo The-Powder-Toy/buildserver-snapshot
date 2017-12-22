@@ -1,7 +1,7 @@
-[precise]
-description=Ubuntu Precise
+[trusty]
+description=Ubuntu Trusty
 directory=/var/chroot
 personality=linux32
-users=vagrant
+users=ubuntu
 groups=sbuild
 root-groups=root
