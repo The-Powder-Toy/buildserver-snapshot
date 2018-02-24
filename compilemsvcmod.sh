@@ -17,6 +17,15 @@ if [ $? -eq 0 ]; then
 	export COMPILE="env CPPDEFINES=UPDATESERVER=\\\"starcatcher.us/TPT\\\" /c/Python27/python.exe /c/Python27/Scripts/scons.py --msvc --static --luajit --release -j2"
 	$COMPILE --win --builddir=build/MSVC 2> error_MSVC.log 1> output_MSVC.log
 	ret=$?
+	if test $ret -ne 0; then
+		echo "msg ##jacob1 test1 please ignore" | ../../nc.exe -w 1 localhost 9876
+		if ! grep -Fq "cannot update program database" output_MSVC.log; then
+			echo "msg ##jacob1 msvc compiler fail, retrying" | ../../nc.exe -w 1 localhost 9876
+			/c/Python27/python.exe /c/Python27/Scripts/scons.py --clean
+			$COMPILE --win --builddir=build/MSVC 2> error_MSVC.log 1> output_MSVC.log
+			ret=$?
+		fi
+	fi
 	mv config.log config_MSVC.log
 	popd
 	exit $ret
