@@ -5,7 +5,7 @@ shift
 
 LIN32_package()
 {
-	cp /var/chroot/home/ubuntu/The-Powder-Toy/build/$1/powder powder
+	cp /var/chroot/home/vagrant/The-Powder-Toy/build/$1/powder powder
 	cp ../{README.md,LICENSE} .
 	./updatepackager powder $1.ptu
 	zip -u "Snapshot linux32.zip" powder README.md LICENSE

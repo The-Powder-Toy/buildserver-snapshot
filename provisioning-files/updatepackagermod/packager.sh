@@ -5,7 +5,7 @@ shift
 
 LIN32_package()
 {
-	cp /var/chroot/home/ubuntu/Jacob1sMod/build/$1/powder "Jacob1's Mod"
+	cp /var/chroot/home/vagrant/Jacob1sMod/build/$1/powder "Jacob1's Mod"
 	cp ../{README,CHANGELOG,LICENSE} .
 	./updatepackager "Jacob1's Mod" $1.ptu
 	zip -u "Jacob1's Mod ver $VER linux32.zip" "Jacob1's Mod" README CHANGELOG LICENSE

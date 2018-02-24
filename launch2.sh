@@ -8,7 +8,7 @@ touch lock.txt
 
 export VAGRANT_HOME="C:\NotProgramFiles\vagrant\files"
 #vagrant box update
-vagrant up > output.txt
+vagrant up
 vagrant ssh
 
 rm lock.txt

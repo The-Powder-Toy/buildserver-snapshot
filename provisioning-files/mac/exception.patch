@@ -1,0 +1,4 @@
+146c146
+<     _LIBCPP_NORETURN friend void rethrow_exception(exception_ptr);
+---
+>     friend void rethrow_exception(exception_ptr);

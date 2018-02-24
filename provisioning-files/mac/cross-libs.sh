@@ -8,7 +8,7 @@ CROSS_BIN_PREFIX="x86_64-apple-darwin11-"
 # where to install the libraries
 # you'll probably want to set this to the location where all the existing MinGW bin/lib/include folders are
 CROSS_INSTALL_DIR="/home/vagrant/mac/osxcross/target/SDK/MacOSX10.7.sdk/usr"
-PATH=$PATH:/home/ubuntu/mac/osxcross/target/bin
+PATH=$PATH:/home/vagrant/mac/osxcross/target/bin
 
 
 #

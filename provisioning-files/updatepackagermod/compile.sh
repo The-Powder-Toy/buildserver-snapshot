@@ -15,12 +15,12 @@ export COMPILE="scons --static -j2 --luajit --release"
 
 LIN32_compile()
 {
-	schroot -c xenial -d ~/Jacob1sMod -- "git pull 2>/dev/null"
-	schroot -c xenial -d ~/Jacob1sMod -- scons --clean
+	schroot -c trusty -d ~/Jacob1sMod -- git pull 2>/dev/null
+	schroot -c trusty -d ~/Jacob1sMod -- scons --clean
 
 	export CCFLAGS="-static-libgcc -static-libstdc++"
 	export LINKFLAGS="-static-libgcc -static-libstdc++"
-	schroot -c xenial -d ~/Jacob1sMod -p -- $COMPILE --32bit --builddir=build/$1 2> error_$1.log 1> output_$1.log
+	schroot -c trusty -d ~/Jacob1sMod -p -- $COMPILE --32bit --builddir=build/$1 2> error_$1.log 1> output_$1.log
 }
 
 LIN64_compile()

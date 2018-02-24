@@ -2,6 +2,6 @@
 description=Ubuntu Trusty
 directory=/var/chroot
 personality=linux32
-users=ubuntu
+users=vagrant
 groups=sbuild
 root-groups=root
