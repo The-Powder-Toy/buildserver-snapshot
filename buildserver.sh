@@ -43,7 +43,8 @@ sudo chown vagrant:vagrant -R Powder.app
 chmod +x cross-libs.sh
 git clone https://github.com/tpoechtrager/osxcross
 cd osxcross
-sudo tools/get_dependencies.sh
+#sudo tools/get_dependencies.sh
+sudo apt-get install -y clang-3.4 llvm-3.4-dev libxml2-dev uuid-dev libssl-dev bash patch make tar xz-utils bzip2 gzip sed cpio
 cp ../MacOSX10.7.sdk.tar.bz2 tarballs
 SDK_VERSION=10.7 OSX_VERSION_MIN=10.6 UNATTENDED=1 ./build.sh
 cd ..

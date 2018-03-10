@@ -8,7 +8,7 @@ if [ $? -eq 0 ]; then
 	pushd source/Jacob1sMod
 	git pull
 	if test $? -ne 0; then
-		echo "msg ##jacob1 Error, could not update source" | ./nc.exe -w 1 localhost 9876
+		echo "msg ##jacob1 Error, could not update source" | ../../nc.exe -w 1 localhost 9876
 		exit 1
 	fi
 	echo "$(git rev-parse HEAD)" > latest_MSVC.log

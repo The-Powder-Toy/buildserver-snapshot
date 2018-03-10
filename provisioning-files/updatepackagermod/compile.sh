@@ -43,7 +43,7 @@ MACOSX_compile()
 	export LINKFLAGS=
 	OLDPATH=$PATH
 	PATH=~/mac/osxcross/target/SDK/MacOSX10.7.sdk/usr/bin:~/mac/osxcross/target/bin:$PATH
-	CC=o64-clang CXX=o64-clang++ STRIP=x86_64-apple-darwin11-strip $COMPILE --mac --builddir=build/$1 2> error_$1.log 1> output_$1.log
+	CC=o64-clang CXX=o64-clang++-libc++ STRIP=x86_64-apple-darwin11-strip $COMPILE --mac --builddir=build/$1 2> error_$1.log 1> output_$1.log
 	ret=$?
 	PATH=$OLDPATH
 	return $ret
