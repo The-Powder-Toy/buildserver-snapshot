@@ -122,6 +122,7 @@ sdl_extractfolder="tpt-libs"
 sdl_compile()
 {
 	pushd $1 > /dev/null
+	# When upgrading SDK, may need some flag on ./configure like -x-include=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/Tk.framework/Versions/Current/Headers
 	./configure --host=$HOST --build=`build-scripts/config.guess` --prefix=$CROSS_INSTALL_DIR && \
 	$MAKE
 	result=$?

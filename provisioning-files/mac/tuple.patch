@@ -1,0 +1,18 @@
+322a323,326
+>     __tuple_leaf(__tuple_leaf&& __t) _NOEXCEPT_(is_nothrow_move_constructible<_Hp>::value)
+>         : value(_VSTD::forward<_Hp>(__t.get()))
+>         {}
+> 
+518a523,525
+>         __tuple_impl(const __tuple_impl&) = default;
+>         __tuple_impl(__tuple_impl&&) = default;
+> 
+523a531,538
+>             return *this;
+>         }
+> 
+>         _LIBCPP_INLINE_VISIBILITY
+>         __tuple_impl&
+>         operator=(__tuple_impl&& __t) _NOEXCEPT_((__all<is_nothrow_move_assignable<_Tp>::value...>::value))
+>         {
+>             __swallow(__tuple_leaf<_Indx, _Tp>::operator=(_VSTD::forward<_Tp>(static_cast<__tuple_leaf<_Indx, _Tp>&>(__t).get()))...);

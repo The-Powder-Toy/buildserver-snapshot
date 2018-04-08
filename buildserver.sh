@@ -1,7 +1,7 @@
 #!/bin/sh
 
 sudo apt-get update
-sudo apt-get install -y build-essential git scons cmake pkg-config mingw32 mingw32-binutils mingw32-runtime zip unzip libc6-dev-i386 libx11-dev libxext-dev libssl-dev libreadline-dev libncurses5-dev schroot debootstrap tofrodos genisoimage
+sudo apt-get install -y build-essential git scons cmake pkg-config mingw-w64 zip unzip libc6-dev-i386 libx11-dev libxext-dev libssl-dev libreadline-dev libncurses5-dev schroot debootstrap tofrodos genisoimage
 
 cp -r /vagrant/provisioning-files/* .
 
@@ -32,9 +32,9 @@ cd cross-libs
 chmod +x cross-libs.sh
 ./cross-libs.sh make bzip2 fftw lua lua52 luajit pthread regex sdl zlib
 sudo ./cross-libs.sh install bzip2 fftw lua lua52 luajit pthread regex sdl zlib
-pushd /usr/lib/gcc/i586-mingw32msvc/4.2.1-sjlj/
-i586-mingw32msvc-ar -d libstdc++.a stubs.o
-popd
+#pushd /usr/lib/gcc/i586-mingw32msvc/4.2.1-sjlj/
+#i586-mingw32msvc-ar -d libstdc++.a stubs.o
+#popd
 cd ..
 
 # OS X
@@ -44,11 +44,13 @@ chmod +x cross-libs.sh
 git clone https://github.com/tpoechtrager/osxcross
 cd osxcross
 #sudo tools/get_dependencies.sh
-sudo apt-get install -y clang-3.4 llvm-3.4-dev libxml2-dev uuid-dev libssl-dev bash patch make tar xz-utils bzip2 gzip sed cpio
+sudo apt-get install -y clang llvm libxml2-dev uuid-dev libssl-dev bash patch make tar xz-utils bzip2 gzip sed cpio
+sudo apt install libssl1.0-dev
 cp ../MacOSX10.7.sdk.tar.bz2 tarballs
 SDK_VERSION=10.7 OSX_VERSION_MIN=10.6 UNATTENDED=1 ./build.sh
 cd ..
 patch /home/vagrant/mac/osxcross/target/SDK/MacOSX10.7.sdk/usr/include/c++/v1/exception exception.patch
+patch /home/vagrant/mac/osxcross/target/SDK/MacOSX10.7.sdk/usr/include/c++/v1/tuple tuple.patch
 PATH=$PATH:/home/vagrant/mac/osxcross/target/bin
 ./cross-libs.sh make sdl fftw lua lua52 luajit
 sudo ./cross-libs.sh install sdl fftw lua lua52 luajit
