@@ -205,6 +205,29 @@ sdl_install()
 	return $result
 }
 
+sdl2_url="http://www.libsdl.org/release/SDL2-2.0.8.tar.gz"
+sdl2_md5="3800d705cef742c6a634f202c37f263f"
+sdl2_filename="SDL2-2.0.8.tar.gz"
+sdl2_folder="/SDL2-2.0.8"
+sdl2_extractfolder="tpt-libs"
+sdl2_compile()
+{
+	pushd $1 > /dev/null
+	./configure --host=$HOST --build=`build-scripts/config.guess` --disable-shared --prefix=$MINGW_INSTALL_DIR && \
+	$MAKE WINDRES=$WINDRES
+	result=$?
+	popd > /dev/null
+	return $result
+}
+sdl2_install()
+{
+	pushd $1 > /dev/null
+	$MAKE install
+	result=$?
+	popd > /dev/null
+	return $result
+}
+
 pthread_url="ftp://sources.redhat.com/pub/pthreads-win32/pthreads-w32-2-9-1-release.tar.gz"
 pthread_md5="36ba827d6aa0fa9f9ae740a35626e2e3"
 pthread_filename="pthreads-w32-2-9-1-release.tar.gz"
@@ -380,7 +403,7 @@ echo_usage()
     \033[1m"${0}"\033[m make \033[4mLIBRARY_NAME\033[m...
     \033[1msudo "${0}"\033[m install \033[4mLIBRARY_NAME\033[m...
     
-  Valid LIBRARY_NAMEs are: \033[1mbzip2 fftw lua lua52 luajit pthread regex sdl zlib\033[m
+  Valid LIBRARY_NAMEs are: \033[1mbzip2 fftw lua lua52 luajit pthread regex sdl sdl2 zlib\033[m
 \n"
 }
 

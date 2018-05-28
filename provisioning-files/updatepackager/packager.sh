@@ -9,7 +9,7 @@ LIN32_package()
 	cp ../{README.md,LICENSE} .
 	./updatepackager powder $1.ptu
 	zip -u "Snapshot linux32.zip" powder README.md LICENSE
-	rm powder README LICENSE
+	rm powder README.md LICENSE
 }
 
 LIN64_package()
@@ -18,13 +18,13 @@ LIN64_package()
 	cp ../{README.md,LICENSE} .
 	./updatepackager powder64 $1.ptu
 	zip -u "Snapshot linux64.zip" powder64 README.md LICENSE
-	rm powder64 README LICENSE
+	rm powder64 README.md LICENSE
 }
 
 WIN32_package()
 {
 	cp ../build/$1/Powder.exe Powder.exe
-	cp ../README readme.txt
+	cp ../README.md readme.txt
 	cp ../LICENSE license.txt
 	todos {readme,license}.txt
 	./updatepackager Powder.exe $1.ptu

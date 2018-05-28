@@ -2,12 +2,12 @@
 
 #change these to match your MinGW installation:
 # platform name, for configure scripts
-HOST="i686-w64-mingw32" 
+#HOST="i686-w64-mingw32" 
 # prefix for MinGW executables (e.g. if MinGW gcc is named i686-w64-mingw32-gcc, use "i686-w64-mingw32-")
-MINGW_BIN_PREFIX="i686-w64-mingw32-"
+#MINGW_BIN_PREFIX="i686-w64-mingw32-"
 # where to install the libraries
 # you'll probably want to set this to the location where all the existing MinGW bin/lib/include folders are
-MINGW_INSTALL_DIR="/usr/i686-w64-mingw32" 
+#MINGW_INSTALL_DIR="/usr/i686-w64-mingw32" 
 
 
 #
@@ -225,6 +225,31 @@ sdl_install()
 	return $result
 }
 
+sdl2_url="http://www.libsdl.org/release/SDL2-2.0.8.tar.gz"
+sdl2_md5="3800d705cef742c6a634f202c37f263f"
+sdl2_filename="SDL2-2.0.8.tar.gz"
+sdl2_folder="/SDL2-2.0.8"
+sdl2_extractfolder="tpt-libs"
+sdl2_compile()
+{
+	cp glibc.patch $1
+	pushd $1 > /dev/null
+	patch src/stdlib/SDL_stdlib.c glibc.patch
+	./configure --build=`build-scripts/config.guess` --disable-shared && \
+	$MAKE
+	result=$?
+	popd > /dev/null
+	return $result
+}
+sdl2_install()
+{
+	pushd $1 > /dev/null
+	$MAKE install
+	result=$?
+	popd > /dev/null
+	return $result
+}
+
 lua_url="http://www.lua.org/ftp/lua-5.1.4.tar.gz"
 lua_md5="d0870f2de55d59c1c8419f36e8fac150"
 lua_filename="lua-5.1.4.tar.gz"
@@ -304,7 +329,7 @@ echo_usage()
     \033[1m"${0}"\033[m make \033[4mLIBRARY_NAME\033[m...
     \033[1msudo "${0}"\033[m install \033[4mLIBRARY_NAME\033[m...
     
-  Valid LIBRARY_NAMEs are: \033[1mfftw lua lua52 luajit sdl\033[m
+  Valid LIBRARY_NAMEs are: \033[1mfftw lua lua52 luajit sdl sdl2\033[m
 \n"
 }
 

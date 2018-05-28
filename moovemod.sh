@@ -11,7 +11,7 @@ fi
 
 mv ../output.txt /c/StarHTTP/TPT/mod/Output/vagrantoutput.txt
 cp *.{zip,dmg} "/c/StarHTTP/TPT/mod/Older/"
-rm /c/StarHTTP/TPT/mod/*.{zip,dmg}
+#rm /c/StarHTTP/TPT/mod/*.{zip,dmg}
 mv *.{zip,dmg} /c/StarHTTP/TPT/mod/
 for f in /c/StarHTTP/TPT/mod/*.{zip,dmg}; do mv "$f" "$(echo "$f" | sed -e 's/ ver [0-9]\+\.[0-9]\+//')"; done
 mv *.ptu /c/StarHTTP/TPT/mod/

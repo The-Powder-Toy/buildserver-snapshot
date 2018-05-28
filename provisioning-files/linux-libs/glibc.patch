@@ -1,0 +1,4 @@
+33a34,36
+> asm (".symver powf, powf@GLIBC_2.2.5");
+> asm (".symver logf, logf@GLIBC_2.2.5");
+> 

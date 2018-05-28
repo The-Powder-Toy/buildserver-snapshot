@@ -15,12 +15,12 @@ export COMPILE="scons --static --snapshot-id=$VER -j2 --luajit --release"
 
 LIN32_compile()
 {
-	schroot -c trusty -d ~/The-Powder-Toy -- git pull 2>/dev/null
-	schroot -c trusty -d ~/The-Powder-Toy -- scons --clean
+	schroot -c bionic -d ~/The-Powder-Toy -- git pull 2>/dev/null
+	schroot -c bionic -d ~/The-Powder-Toy -- scons --clean
 
 	export CCFLAGS="-static-libgcc -static-libstdc++"
 	export LINKFLAGS="-static-libgcc -static-libstdc++"
-	schroot -c trusty -d ~/The-Powder-Toy -p -- $COMPILE --32bit --builddir=build/$1 2> error_$1.log 1> output_$1.log
+	schroot -c bionic -d ~/The-Powder-Toy -p -- $COMPILE --32bit --builddir=build/$1 2> error_$1.log 1> output_$1.log
 }
 
 LIN64_compile()

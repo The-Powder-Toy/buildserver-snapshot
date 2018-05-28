@@ -1,5 +1,5 @@
-[trusty]
-description=Ubuntu Trusty
+[bionic]
+description=Ubuntu Bionic
 directory=/var/chroot
 personality=linux32
 users=vagrant
