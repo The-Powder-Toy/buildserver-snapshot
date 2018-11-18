@@ -46,7 +46,7 @@ git clone https://github.com/tpoechtrager/osxcross
 cd osxcross
 #sudo tools/get_dependencies.sh
 sudo apt-get install -y clang llvm libxml2-dev uuid-dev libssl-dev bash make tar xz-utils bzip2 gzip sed cpio
-sudo apt install libssl1.0-dev
+sudo apt-get install -y libssl1.0-dev
 cp ../MacOSX10.7.sdk.tar.bz2 tarballs
 SDK_VERSION=10.7 OSX_VERSION_MIN=10.6 UNATTENDED=1 ./build.sh
 cd ..

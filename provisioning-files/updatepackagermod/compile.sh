@@ -18,15 +18,15 @@ LIN32_compile()
 	schroot -c bionic -d ~/Jacob1sMod -- git pull 2>/dev/null
 	schroot -c bionic -d ~/Jacob1sMod -- scons --clean
 
-	export CCFLAGS="-static-libgcc -static-libstdc++"
-	export LINKFLAGS="-static-libgcc -static-libstdc++"
+	export CCFLAGS="-static-libgcc -static-libstdc++ -fno-pie"
+	export LINKFLAGS="-static-libgcc -static-libstdc++ -no-pie"
 	schroot -c bionic -d ~/Jacob1sMod -p -- $COMPILE --32bit --builddir=build/$1 2> error_$1.log 1> output_$1.log
 }
 
 LIN64_compile()
 {
-	export CCFLAGS="-static-libgcc -static-libstdc++"
-	export LINKFLAGS="-static-libgcc -static-libstdc++"
+	export CCFLAGS="-static-libgcc -static-libstdc++ -fno-pie"
+	export LINKFLAGS="-static-libgcc -static-libstdc++ -no-pie"
 	$COMPILE --64bit --builddir=build/$1 2> error_$1.log 1> output_$1.log
 }
 
