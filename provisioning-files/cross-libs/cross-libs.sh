@@ -205,10 +205,10 @@ sdl_install()
 	return $result
 }
 
-sdl2_url="http://www.libsdl.org/release/SDL2-2.0.8.tar.gz"
-sdl2_md5="3800d705cef742c6a634f202c37f263f"
-sdl2_filename="SDL2-2.0.8.tar.gz"
-sdl2_folder="/SDL2-2.0.8"
+sdl2_url="http://www.libsdl.org/release/SDL2-2.0.9.tar.gz"
+sdl2_md5="f2ecfba915c54f7200f504d8b48a5dfe"
+sdl2_filename="SDL2-2.0.9.tar.gz"
+sdl2_folder="/SDL2-2.0.9"
 sdl2_extractfolder="tpt-libs"
 sdl2_compile()
 {

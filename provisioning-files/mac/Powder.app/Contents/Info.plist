@@ -16,9 +16,9 @@
 	<key>CFBundleName</key>
 	<string>The Powder Toy</string>
 	<key>CFBundleIconFile</key>
-	<string>powder.icns</string>
+	<string>icon.icns</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright © 2008-2011 Stanislaw K Skowrenek, Copyright  2011-2018 Simon Robertshaw, Copyright © 2016-2018 jacob1</string>
+	<string>Copyright © 2008-2011 Stanislaw K Skowrenek, Copyright  2011-2019 Simon Robertshaw, Copyright © 2016-2019 jacob1</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleDocumentTypes</key>
