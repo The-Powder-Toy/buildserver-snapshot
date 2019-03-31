@@ -16,7 +16,7 @@
 	<key>CFBundleName</key>
 	<string>Jacob1's Mod</string>
 	<key>CFBundleIconFile</key>
-	<string>powder.icns</string>
+	<string>icon.icns</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2011-2019 jacob1</string>
 	<key>CFBundleDevelopmentRegion</key>

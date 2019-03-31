@@ -108,7 +108,7 @@ install_lib()
 	return 0
 }
 
-bzip2_url="http://bzip.org/1.0.6/bzip2-1.0.6.tar.gz"
+bzip2_url="https://starcatcher.us/TPT/bzip2-1.0.6.tar.gz"
 bzip2_md5="00b516f4704d4a7cb50a1d97e6e8e15b"
 bzip2_filename="bzip2-1.0.6.tar.gz"
 bzip2_folder="/bzip2-1.0.6"
@@ -316,6 +316,28 @@ luajit_install()
 	return $result
 }
 
+curl_url="https://curl.haxx.se/download/curl-7.64.0.tar.gz"
+curl_md5="a026740d599a32bcbbe6e70679397899"
+curl_filename="curl-7.64.0.tar.gz"
+curl_folder="/curl-7.64.0"
+curl_extractfolder="tpt-libs"
+curl_compile()
+{
+	pushd $1 > /dev/null
+	./configure --disable-shared --disable-ftp --disable-telnet --disable-smtp --disable-imap --disable-pop3 --disable-smb --disable-gopher --disable-dict --disable-file --disable-tftp --disable-rtsp --disable-ldap && \
+	$MAKE
+	result=$?
+	popd > /dev/null
+	return $result
+}
+curl_install()
+{
+	pushd $1 > /dev/null
+	$MAKE install
+	result=$?
+	popd > /dev/null
+	return $result
+}
 
 echo_usage()
 {
@@ -329,7 +351,7 @@ echo_usage()
     \033[1m"${0}"\033[m make \033[4mLIBRARY_NAME\033[m...
     \033[1msudo "${0}"\033[m install \033[4mLIBRARY_NAME\033[m...
     
-  Valid LIBRARY_NAMEs are: \033[1mfftw lua lua52 luajit sdl sdl2\033[m
+  Valid LIBRARY_NAMEs are: \033[1mfftw lua lua52 luajit sdl sdl2 curl\033[m
 \n"
 }
 
