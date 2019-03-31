@@ -324,6 +324,7 @@ curl_extractfolder="tpt-libs"
 curl_compile()
 {
 	pushd $1 > /dev/null
+	--this is a test please ignore
 	./configure --disable-shared --disable-ftp --disable-telnet --disable-smtp --disable-imap --disable-pop3 --disable-smb --disable-gopher --disable-dict --disable-file --disable-tftp --disable-rtsp --disable-ldap && \
 	$MAKE
 	result=$?
