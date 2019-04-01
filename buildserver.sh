@@ -24,15 +24,15 @@ sudo chown vagrant -R /var/chroot/home/vagrant
 # 64 bit linux
 cd linux-libs
 chmod +x linux-libs.sh
-./linux-libs.sh make bzip2 fftw lua lua52 luajit sdl sdl2 zlib
-sudo ./linux-libs.sh install bzip2 fftw lua lua52 luajit sdl sdl2 zlib
+./linux-libs.sh make bzip2 fftw lua lua52 luajit sdl sdl2 zlib curl
+sudo ./linux-libs.sh install bzip2 fftw lua lua52 luajit sdl sdl2 zlib curl
 cd ..
 
 # Windows
 cd cross-libs
 chmod +x cross-libs.sh
-./cross-libs.sh make bzip2 fftw lua lua52 luajit pthread regex sdl sdl2 zlib
-sudo ./cross-libs.sh install bzip2 fftw lua lua52 luajit pthread regex sdl sdl2 zlib
+./cross-libs.sh make bzip2 fftw lua lua52 luajit pthread regex sdl sdl2 zlib curl
+sudo ./cross-libs.sh install bzip2 fftw lua lua52 luajit pthread regex sdl sdl2 zlib curl
 #pushd /usr/lib/gcc/i586-mingw32msvc/4.2.1-sjlj/
 #i586-mingw32msvc-ar -d libstdc++.a stubs.o
 #popd
@@ -53,8 +53,8 @@ cd ..
 patch /home/vagrant/mac/osxcross/target/SDK/MacOSX10.7.sdk/usr/include/c++/v1/exception exception.patch
 patch /home/vagrant/mac/osxcross/target/SDK/MacOSX10.7.sdk/usr/include/c++/v1/tuple tuple.patch
 PATH=$PATH:/home/vagrant/mac/osxcross/target/bin
-./cross-libs.sh make sdl sdl2 fftw lua lua52 luajit
-sudo ./cross-libs.sh install sdl sdl2 fftw lua lua52 luajit
+./cross-libs.sh make sdl sdl2 fftw lua lua52 luajit curl
+sudo ./cross-libs.sh install sdl sdl2 fftw lua lua52 luajit curl
 git clone https://github.com/hamstergene/libdmg-hfsplus.git
 mv nochecksumpatch libdmg-hfsplus
 cd libdmg-hfsplus/
