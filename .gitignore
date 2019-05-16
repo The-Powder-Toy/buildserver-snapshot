@@ -8,3 +8,4 @@ source/Jacob1sMod
 args.txt
 *.sdk.tar.bz2
 *.sdk.tar.xz
+ubuntu*.log
