@@ -6,7 +6,7 @@ if [ -f "lock.txt" ]; then
 fi
 touch lock.txt
 
-export VAGRANT_HOME="C:\NotProgramFiles\vagrant\files"
+export VAGRANT_HOME="C:\Starcatcher\Vagrant\files"
 #vagrant box update
 vagrant up
 vagrant ssh

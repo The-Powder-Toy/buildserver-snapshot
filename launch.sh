@@ -20,7 +20,7 @@ echo grep -o ' ' args.txt | wc -l
 	touch lock.txt
 	rm output.txt
 
-	export VAGRANT_HOME="C:\NotProgramFiles\vagrant\files"
+	export VAGRANT_HOME="C:\Starcatcher\Vagrant\files"
 	vagrant up
 	if [ $mod -ne 0 ]; then
 		echo 1
