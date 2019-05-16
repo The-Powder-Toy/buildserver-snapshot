@@ -17,9 +17,9 @@ sudo mv chroot_build.sh /var/chroot/home/vagrant/chroot_build.sh
 sudo chroot /var/chroot /home/vagrant/chroot_build.sh
 # Fix permissions and stuff
 sudo cp /etc/passwd /var/chroot/etc/passwd
+sudo chown vagrant -R /var/chroot/home/vagrant
 schroot -c bionic -- git clone https://github.com/ThePowderToy/The-Powder-Toy.git
 schroot -c bionic -- git clone https://github.com/jacob1/The-Powder-Toy.git Jacob1sMod
-sudo chown vagrant -R /var/chroot/home/vagrant
 
 # 64 bit linux
 cd linux-libs
