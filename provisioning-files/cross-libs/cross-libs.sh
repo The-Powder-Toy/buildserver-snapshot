@@ -117,7 +117,7 @@ install_lib()
 
 
 
-bzip2_url="http://bzip.org/1.0.6/bzip2-1.0.6.tar.gz"
+bzip2_url="https://starcatcher.us/TPT/libs/bzip2-1.0.6.tar.gz"
 bzip2_md5="00b516f4704d4a7cb50a1d97e6e8e15b"
 bzip2_filename="bzip2-1.0.6.tar.gz"
 bzip2_folder="/bzip2-1.0.6"
@@ -368,7 +368,7 @@ luajit_install()
 	return $result
 }
 
-zlib_url="http://zlib.net/zlib-1.2.11.tar.gz"
+zlib_url="https://starcatcher.us/TPT/libs/zlib-1.2.11.tar.gz"
 zlib_md5="1c9f62f0778697a09d36121ead88e08e"
 zlib_filename="zlib-1.2.11.tar.gz"
 zlib_folder="/zlib-1.2.11"
