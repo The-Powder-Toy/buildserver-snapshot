@@ -1,6 +1,8 @@
 #!/bin/bash
 
-URL="starcatcher.us"
+mkdir -p output
+
+URL="pilihp.starcatcher.us"
 rm mod.txt
 mod=$?
 if [ $mod -ne 0 ]; then
