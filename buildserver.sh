@@ -1,7 +1,7 @@
 #!/bin/sh
 
 sudo apt-get update
-sudo apt-get install -y build-essential git scons cmake pkg-config mingw-w64 zip unzip patch libc6-dev-i386 libx11-dev libxext-dev libssl1.0-dev libreadline-dev libncurses5-dev schroot debootstrap tofrodos genisoimage
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential git scons cmake pkg-config mingw-w64 zip unzip patch libc6-dev-i386 libx11-dev libxext-dev libssl1.0-dev libreadline-dev libncurses5-dev schroot debootstrap tofrodos genisoimage
 
 cp -r /vagrant/provisioning-files/* .
 
@@ -20,12 +20,14 @@ sudo cp /etc/passwd /var/chroot/etc/passwd
 sudo chown vagrant -R /var/chroot/home/vagrant
 schroot -c bionic -- git clone https://github.com/ThePowderToy/The-Powder-Toy.git
 schroot -c bionic -- git clone https://github.com/jacob1/The-Powder-Toy.git Jacob1sMod
+# The above schroot is apparently run as root and not as vagrant?
+sudo chown vagrant -R /var/chroot/home/vagrant
 
 # 64 bit linux
 cd linux-libs
 chmod +x linux-libs.sh
-./linux-libs.sh make bzip2 fftw lua lua52 luajit sdl sdl2 zlib curl
-sudo ./linux-libs.sh install bzip2 fftw lua lua52 luajit sdl sdl2 zlib curl
+./linux-libs.sh make fftw lua lua52 luajit sdl sdl2 zlib curl
+sudo ./linux-libs.sh install fftw lua lua52 luajit sdl sdl2 zlib curl
 cd ..
 
 # Windows
@@ -45,8 +47,8 @@ chmod +x cross-libs.sh
 git clone https://github.com/tpoechtrager/osxcross
 cd osxcross
 #sudo tools/get_dependencies.sh
-sudo apt-get install -y clang llvm libxml2-dev uuid-dev libssl-dev bash make tar xz-utils bzip2 gzip sed cpio
-sudo apt-get install -y libssl1.0-dev
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -y clang llvm libxml2-dev uuid-dev libssl-dev bash make tar xz-utils bzip2 gzip sed cpio
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -y libssl1.0-dev
 cp ../MacOSX10.7.sdk.tar.bz2 tarballs
 SDK_VERSION=10.7 OSX_VERSION_MIN=10.6 UNATTENDED=1 ./build.sh
 cd ..
@@ -64,6 +66,12 @@ make
 make install
 #sudo rm /home/vagrant/mac/osxcross/target/SDK/MacOSX10.7.sdk/usr/lib/libSDL-1.2.0.dylib
 cd ../..
+
+# This needs to be done after building osxcross, because osxcross can't handle the static bzip2
+cd linux-libs
+./linux-libs.sh make bzip2
+./linux-libs.sh install bzip2
+cd ..
 
 # Get tpt source, fix some permissions
 git clone https://github.com/ThePowderToy/The-Powder-Toy.git

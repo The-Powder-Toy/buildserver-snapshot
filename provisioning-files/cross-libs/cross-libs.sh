@@ -398,7 +398,7 @@ curl_extractfolder="tpt-libs"
 curl_compile()
 {
 	pushd $1 > /dev/null
-	./configure --host=$HOST --prefix=$MINGW_INSTALL_DIR --disable-shared --with-zlib=/usr/i686-w64-mingw32/lib/ --disable-ftp --disable-telnet --disable-smtp --disable-imap --disable-pop3 --disable-smb --disable-gopher --disable-dict --disable-file --disable-tftp --disable-rtsp --disable-ldap && \
+	./configure --host=$HOST --prefix=$MINGW_INSTALL_DIR --disable-shared --with-zlib=/usr/i686-w64-mingw32/lib/ --with-winssl --disable-ftp --disable-telnet --disable-smtp --disable-imap --disable-pop3 --disable-smb --disable-gopher --disable-dict --disable-file --disable-tftp --disable-rtsp --disable-ldap && \
 	$MAKE
 	result=$?
 	popd > /dev/null

@@ -2,7 +2,7 @@
 
 mkdir -p output
 
-URL="pilihp.starcatcher.us"
+URL="starcatcher.us"
 rm mod.txt
 mod=$?
 if [ $mod -ne 0 ]; then

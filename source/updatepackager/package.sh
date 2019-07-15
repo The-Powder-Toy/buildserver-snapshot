@@ -10,7 +10,7 @@ if [ $? -eq 0 ]; then
 	cp ../The-Powder-Toy/README.md readme.txt
 	cp ../The-Powder-Toy/LICENSE license.txt
 	./packager.exe Powder.exe WIN32.ptu
-	/c/MinGW/msys/1.0/bin/zip.exe -u "Snapshot.zip" Powder.exe readme.txt license.txt
+	powershell Compress-Archive -Path Powder.exe,readme.txt,license.txt -DestinationPath Snapshot.zip
 	rm Powder.exe readme.txt license.txt
 
 	mv ../The-Powder-Toy/*log ../../output

@@ -14,7 +14,7 @@ if [ $? -eq 0 ]; then
 	echo "$(git rev-parse HEAD)" > latest_MSVC.log
 	scons --clean
 	export VER=$(cat ../../args.txt | cut -d" " -f 1)
-	export COMPILE="env CPPDEFINES=UPDATESERVER=\\\"starcatcher.us/TPT\\\" scons --msvc --static --luajit --release --snapshot-id=$VER"
+	export COMPILE="env CPPDEFINES=UPDATESERVER=\\\"starcatcher.us/TPT\\\" scons --msvc --static --luajit --release --snapshot-id=$VER -j3"
 	$COMPILE --win --builddir=build/MSVC 2> error_MSVC.log 1> output_MSVC.log
 	ret=$?
 	if test $ret -ne 0; then
