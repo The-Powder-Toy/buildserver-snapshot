@@ -14,7 +14,7 @@ else
 fi
 
 echo grep -o ' ' args.txt | wc -l
-#if [ test `grep -o ' ' args.txt | wc -l` -gt 1 ] || true; then
+#if [ test `wc -w args.txt` -gt 2 ] || [ ! grep "MSVC" args.txt ]; then
 	if [ -f "lock.txt" ]; then
 		echo "msg ##jacob1 Error: vagrant is already running" | ./nc.exe -w 1 localhost 9876
 		exit 1
