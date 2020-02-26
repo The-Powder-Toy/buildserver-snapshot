@@ -38,7 +38,7 @@ MACOSX_package()
 	cp ../build/$1/powder-x powder-x
 	cp ../{README,CHANGELOG,LICENSE} MacDMG
 	./updatepackager powder-x $1.ptu
-	mv powder-x "MacDMG/Jacob1's Mod.app/Contents/MacOS"
+	mv powder-x "MacDMG/Jacob1's Mod.app/Contents/MacOS/"
 	genisoimage -D -V "Jacob1's Mod" -no-pad -r -apple -o powder-osx-uncompressed.dmg "MacDMG"
 	dmg dmg powder-osx-uncompressed.dmg "Jacob1's Mod ver $VER.dmg"
 	rm powder-osx-uncompressed.dmg "MacDMG/Jacob1's Mod.app/Contents/MacOS/powder-x" MacDMG/{README,CHANGELOG,LICENSE}

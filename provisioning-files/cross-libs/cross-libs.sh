@@ -33,7 +33,7 @@ export RANLIB=${MINGW_BIN_PREFIX}ranlib
 export WINDRES=${MINGW_BIN_PREFIX}windres
 export STRIP=${MINGW_BIN_PREFIX}strip
 export PREFIX=${MINGW_INSTALL_DIR}
-MAKE="make -j 2"
+MAKE="make -j 4"
 
 
 
@@ -117,10 +117,10 @@ install_lib()
 
 
 
-bzip2_url="https://starcatcher.us/TPT/libs/bzip2-1.0.6.tar.gz"
-bzip2_md5="00b516f4704d4a7cb50a1d97e6e8e15b"
-bzip2_filename="bzip2-1.0.6.tar.gz"
-bzip2_folder="/bzip2-1.0.6"
+bzip2_url="https://starcatcher.us/TPT/libs/bzip2-1.0.8.tar.gz"
+bzip2_md5="67e051268d0c475ea773822f7500d0e5"
+bzip2_filename="bzip2-1.0.8.tar.gz"
+bzip2_folder="/bzip2-1.0.8"
 bzip2_extractfolder="tpt-libs"
 bzip2_compile()
 {
@@ -142,10 +142,10 @@ bzip2_install()
 	return $result
 }
 
-fftw_url="http://www.fftw.org/fftw-3.3.3.tar.gz"
-fftw_md5="0a05ca9c7b3bfddc8278e7c40791a1c2"
-fftw_filename="fftw-3.3.3.tar.gz"
-fftw_folder="/fftw-3.3.3"
+fftw_url="http://www.fftw.org/fftw-3.3.8.tar.gz"
+fftw_md5="8aac833c943d8e90d51b697b27d4384d"
+fftw_filename="fftw-3.3.8.tar.gz"
+fftw_folder="/fftw-3.3.8"
 fftw_extractfolder="tpt-libs"
 fftw_compile()
 {
@@ -165,50 +165,10 @@ fftw_install()
 	return $result
 }
 
-sdl_directx_url="http://www.libsdl.org/extras/win32/common/directx-devel.tar.gz"
-sdl_directx_md5="389a36e4d209c0a76bea7d7cb6315315"
-sdl_directx_filename="directx-devel.tar.gz"
-sdl_directx_folder=""
-sdl_directx_extractfolder="tpt-libs/sdl-directx-devel"
-sdl_directx_compile()
-{
-	cp -f $1/include/* ${sdl_extractfolder}${sdl_folder}/include/
-	return $?
-}
-
-sdl_url="http://www.libsdl.org/release/SDL-1.2.15.tar.gz"
-sdl_md5="9d96df8417572a2afb781a7c4c811a85"
-sdl_filename="SDL-1.2.15.tar.gz"
-sdl_folder="/SDL-1.2.15"
-sdl_extractfolder="tpt-libs"
-sdl_compile()
-{
-	printf "\033[1mGetting extra headers for SDL...\033[m\n"
-	make_lib sdl_directx
-	if test $? -ne 0; then
-		return 1
-	fi
-	lib="sdl"
-	pushd $1 > /dev/null
-	./configure --host=$HOST --build=`build-scripts/config.guess` --prefix=$MINGW_INSTALL_DIR && \
-	$MAKE WINDRES=$WINDRES
-	result=$?
-	popd > /dev/null
-	return $result
-}
-sdl_install()
-{
-	pushd $1 > /dev/null
-	$MAKE install
-	result=$?
-	popd > /dev/null
-	return $result
-}
-
-sdl2_url="http://www.libsdl.org/release/SDL2-2.0.9.tar.gz"
-sdl2_md5="f2ecfba915c54f7200f504d8b48a5dfe"
-sdl2_filename="SDL2-2.0.9.tar.gz"
-sdl2_folder="/SDL2-2.0.9"
+sdl2_url="http://www.libsdl.org/release/SDL2-2.0.10.tar.gz"
+sdl2_md5="5a2114f2a6f348bdab5bf52b994811db"
+sdl2_filename="SDL2-2.0.10.tar.gz"
+sdl2_folder="/SDL2-2.0.10"
 sdl2_extractfolder="tpt-libs"
 sdl2_compile()
 {
@@ -223,36 +183,6 @@ sdl2_install()
 {
 	pushd $1 > /dev/null
 	$MAKE install
-	result=$?
-	popd > /dev/null
-	return $result
-}
-
-pthread_url="ftp://sources.redhat.com/pub/pthreads-win32/pthreads-w32-2-9-1-release.tar.gz"
-pthread_md5="36ba827d6aa0fa9f9ae740a35626e2e3"
-pthread_filename="pthreads-w32-2-9-1-release.tar.gz"
-pthread_folder="/pthreads-w32-2-9-1-release"
-pthread_extractfolder="tpt-libs"
-pthread_compile()
-{
-	pushd $1 > /dev/null
-	$MAKE clean && \
-	$MAKE GC CROSS=${MINGW_BIN_PREFIX} && \
-	mv -f libpthreadGC2.a libpthreadGC2.dll.a && \
-	$MAKE clean && \
-	$MAKE clean GC-static CROSS=${MINGW_BIN_PREFIX}
-	result=$?
-	popd > /dev/null
-	return $result
-}
-pthread_install()
-{
-	pushd $1 > /dev/null
-	mkdir -p $MINGW_INSTALL_DIR/bin $MINGW_INSTALL_DIR/include $MINGW_INSTALL_DIR/lib && \
-	cp -f pthreadGC2.dll $MINGW_INSTALL_DIR/bin/ && \
-	cp -f pthread.h sched.h semaphore.h $MINGW_INSTALL_DIR/include/ && \
-	cp -f libpthreadGC2.a $MINGW_INSTALL_DIR/lib/libpthread.a && \
-	cp -f libpthreadGC2.dll.a $MINGW_INSTALL_DIR/lib/libpthread.dll.a && \
 	result=$?
 	popd > /dev/null
 	return $result
@@ -290,10 +220,10 @@ regex_install()
 	return $result
 }
 
-lua_url="http://www.lua.org/ftp/lua-5.1.4.tar.gz"
-lua_md5="d0870f2de55d59c1c8419f36e8fac150"
-lua_filename="lua-5.1.4.tar.gz"
-lua_folder="/lua-5.1.4"
+lua_url="http://www.lua.org/ftp/lua-5.1.5.tar.gz"
+lua_md5="2e115fe26e435e33b0d5c022e4490567"
+lua_filename="lua-5.1.5.tar.gz"
+lua_folder="/lua-5.1.5"
 lua_extractfolder="tpt-libs"
 lua_compile()
 {
@@ -317,10 +247,10 @@ lua_install()
 	return $result
 }
 
-lua52_url="http://www.lua.org/ftp/lua-5.2.3.tar.gz"
-lua52_md5="dc7f94ec6ff15c985d2d6ad0f1b35654"
-lua52_filename="lua-5.2.3.tar.gz"
-lua52_folder="/lua-5.2.3"
+lua52_url="http://www.lua.org/ftp/lua-5.2.4.tar.gz"
+lua52_md5="913fdb32207046b273fdb17aad70be13"
+lua52_filename="lua-5.2.4.tar.gz"
+lua52_folder="/lua-5.2.4"
 lua52_extractfolder="tpt-libs"
 lua52_compile()
 {
@@ -390,10 +320,10 @@ zlib_install()
 	return $result
 }
 
-curl_url="https://curl.haxx.se/download/curl-7.64.0.tar.gz"
-curl_md5="a026740d599a32bcbbe6e70679397899"
-curl_filename="curl-7.64.0.tar.gz"
-curl_folder="/curl-7.64.0"
+curl_url="https://curl.haxx.se/download/curl-7.68.0.tar.gz"
+curl_md5="f68d6f716ff06d357f476ea4ea57a3d6"
+curl_filename="curl-7.68.0.tar.gz"
+curl_folder="/curl-7.68.0"
 curl_extractfolder="tpt-libs"
 curl_compile()
 {
@@ -426,7 +356,7 @@ echo_usage()
     \033[1m"${0}"\033[m make \033[4mLIBRARY_NAME\033[m...
     \033[1msudo "${0}"\033[m install \033[4mLIBRARY_NAME\033[m...
     
-  Valid LIBRARY_NAMEs are: \033[1mbzip2 fftw lua lua52 luajit pthread regex sdl sdl2 zlib curl\033[m
+  Valid LIBRARY_NAMEs are: \033[1mbzip2 fftw lua lua52 luajit regex sdl2 zlib curl\033[m
 \n"
 }
 

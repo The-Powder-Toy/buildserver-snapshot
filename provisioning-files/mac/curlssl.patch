@@ -1,0 +1,4 @@
+1557c1557
+<      test -d "/System/Library/Frameworks/Security.framework"; then
+---
+>      test -d "/home/vagrant/mac/osxcross/target/SDK/MacOSX10.12.sdk/System/Library/Frameworks/Security.framework"; then

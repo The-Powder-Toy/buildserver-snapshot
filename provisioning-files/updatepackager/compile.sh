@@ -11,7 +11,7 @@ scons --clean
 
 export VER="$1"
 export CPPDEFINES="UPDATESERVER=\\\"starcatcher.us/TPT\\\""
-export COMPILE="scons --static --snapshot-id=$VER -j2 --luajit --release"
+export COMPILE="scons --static --snapshot-id=$VER -j4 --luajit --release"
 
 LIN32_compile()
 {
@@ -42,8 +42,8 @@ MACOSX_compile()
 	export CCFLAGS=
 	export LINKFLAGS=
 	OLDPATH=$PATH
-	PATH=~/mac/osxcross/target/SDK/MacOSX10.7.sdk/usr/bin:~/mac/osxcross/target/bin:$PATH
-	CC=o64-clang CXX=o64-clang++-libc++ STRIP=x86_64-apple-darwin11-strip $COMPILE --mac --builddir=build/$1 2> error_$1.log 1> output_$1.log
+	PATH=~/mac/osxcross/target/SDK/MacOSX10.12.sdk/usr/bin:~/mac/osxcross/target/bin:$PATH
+	CC=o64-clang CXX=o64-clang++-libc++ STRIP=x86_64-apple-darwin16-strip $COMPILE --mac --builddir=build/$1 2> error_$1.log 1> output_$1.log
 	ret=$?
 	PATH=$OLDPATH
 	return $ret

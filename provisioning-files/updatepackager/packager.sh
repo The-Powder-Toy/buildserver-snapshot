@@ -37,7 +37,7 @@ MACOSX_package()
 	cp ../build/$1/powder-x powder-x
 	cp ../{README.md,LICENSE} MacDMG
 	./updatepackager powder-x $1.ptu
-	mv powder-x "MacDMG/Powder Snapshot.app/Contents/MacOS"
+	mv powder-x "MacDMG/Powder Snapshot.app/Contents/MacOS/"
 	genisoimage -D -V "The-Powder-Toy Snapshots" -no-pad -r -apple -o powder-osx-uncompressed.dmg "MacDMG"
 	dmg dmg powder-osx-uncompressed.dmg Snapshot.dmg
 	rm powder-osx-uncompressed.dmg "MacDMG/Powder Snapshot.app/Contents/MacOS/powder-x" MacDMG/{README.md,LICENSE}

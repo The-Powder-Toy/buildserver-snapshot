@@ -2,12 +2,12 @@
 
 #change these to match your MinGW installation:
 # platform name, for configure scripts
-HOST="x86_64-apple-darwin11" 
+HOST="x86_64-apple-darwin16"
 # prefix for MinGW executables (e.g. if MinGW gcc is named i686-w64-mingw32-gcc, use "i686-w64-mingw32-")
-CROSS_BIN_PREFIX="x86_64-apple-darwin11-"
+CROSS_BIN_PREFIX="x86_64-apple-darwin16-"
 # where to install the libraries
 # you'll probably want to set this to the location where all the existing MinGW bin/lib/include folders are
-CROSS_INSTALL_DIR="/home/vagrant/mac/osxcross/target/SDK/MacOSX10.7.sdk/usr"
+CROSS_INSTALL_DIR="/home/vagrant/mac/osxcross/target/SDK/MacOSX10.12.sdk/usr"
 PATH=$PATH:/home/vagrant/mac/osxcross/target/bin
 
 
@@ -33,7 +33,7 @@ export CC=${CROSS_BIN_PREFIX}clang
 export RANLIB=${CROSS_BIN_PREFIX}ranlib
 export STRIP=${CROSS_BIN_PREFIX}strip
 export PREFIX=${CROSS_INSTALL_DIR}
-MAKE="make -j 2"
+MAKE="make -j 4"
 
 
 
@@ -114,34 +114,10 @@ install_lib()
 	return 0
 }
 
-sdl_url="http://www.libsdl.org/release/SDL-1.2.15.tar.gz"
-sdl_md5="9d96df8417572a2afb781a7c4c811a85"
-sdl_filename="SDL-1.2.15.tar.gz"
-sdl_folder="/SDL-1.2.15"
-sdl_extractfolder="tpt-libs"
-sdl_compile()
-{
-	pushd $1 > /dev/null
-	# When upgrading SDK, may need some flag on ./configure like -x-include=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/Tk.framework/Versions/Current/Headers
-	./configure --host=$HOST --build=`build-scripts/config.guess` --prefix=$CROSS_INSTALL_DIR && \
-	$MAKE
-	result=$?
-	popd > /dev/null
-	return $result
-}
-sdl_install()
-{
-	pushd $1 > /dev/null
-	$MAKE install
-	result=$?
-	popd > /dev/null
-	return $result
-}
-
-sdl2_url="http://www.libsdl.org/release/SDL2-2.0.8.tar.gz"
-sdl2_md5="3800d705cef742c6a634f202c37f263f"
-sdl2_filename="SDL2-2.0.8.tar.gz"
-sdl2_folder="/SDL2-2.0.8"
+sdl2_url="http://www.libsdl.org/release/SDL2-2.0.10.tar.gz"
+sdl2_md5="5a2114f2a6f348bdab5bf52b994811db"
+sdl2_filename="SDL2-2.0.10.tar.gz"
+sdl2_folder="/SDL2-2.0.10"
 sdl2_extractfolder="tpt-libs"
 sdl2_compile()
 {
@@ -161,10 +137,10 @@ sdl2_install()
 	return $result
 }
 
-fftw_url="http://www.fftw.org/fftw-3.3.3.tar.gz"
-fftw_md5="0a05ca9c7b3bfddc8278e7c40791a1c2"
-fftw_filename="fftw-3.3.3.tar.gz"
-fftw_folder="/fftw-3.3.3"
+fftw_url="http://www.fftw.org/fftw-3.3.8.tar.gz"
+fftw_md5="8aac833c943d8e90d51b697b27d4384d"
+fftw_filename="fftw-3.3.8.tar.gz"
+fftw_folder="/fftw-3.3.8"
 fftw_extractfolder="tpt-libs"
 fftw_compile()
 {
@@ -184,10 +160,10 @@ fftw_install()
 	return $result
 }
 
-lua_url="http://www.lua.org/ftp/lua-5.1.4.tar.gz"
-lua_md5="d0870f2de55d59c1c8419f36e8fac150"
-lua_filename="lua-5.1.4.tar.gz"
-lua_folder="/lua-5.1.4"
+lua_url="http://www.lua.org/ftp/lua-5.1.5.tar.gz"
+lua_md5="2e115fe26e435e33b0d5c022e4490567"
+lua_filename="lua-5.1.5.tar.gz"
+lua_folder="/lua-5.1.5"
 lua_extractfolder="tpt-libs"
 lua_compile()
 {
@@ -211,10 +187,10 @@ lua_install()
 	return $result
 }
 
-lua52_url="http://www.lua.org/ftp/lua-5.2.3.tar.gz"
-lua52_md5="dc7f94ec6ff15c985d2d6ad0f1b35654"
-lua52_filename="lua-5.2.3.tar.gz"
-lua52_folder="/lua-5.2.3"
+lua52_url="http://www.lua.org/ftp/lua-5.2.4.tar.gz"
+lua52_md5="913fdb32207046b273fdb17aad70be13"
+lua52_filename="lua-5.2.4.tar.gz"
+lua52_folder="/lua-5.2.4"
 lua52_extractfolder="tpt-libs"
 lua52_compile()
 {
@@ -262,19 +238,25 @@ luajit_install()
 	return $result
 }
 
-curl_url="https://curl.haxx.se/download/curl-7.64.0.tar.gz"
-curl_md5="a026740d599a32bcbbe6e70679397899"
-curl_filename="curl-7.64.0.tar.gz"
-curl_folder="/curl-7.64.0"
+curl_url="https://curl.haxx.se/download/curl-7.68.0.tar.gz"
+curl_md5="f68d6f716ff06d357f476ea4ea57a3d6"
+curl_filename="curl-7.68.0.tar.gz"
+curl_folder="/curl-7.68.0"
 curl_extractfolder="tpt-libs"
 curl_compile()
 {
-        pushd $1 > /dev/null
-        CC="x86_64-apple-darwin11-clang" CFLAGS="-mmacosx-version-min=10.7" ./configure --host=$HOST --prefix=$CROSS_INSTALL_DIR --disable-shared --disable-ftp --disable-telnet --disable-smtp --disable-imap --disable-pop3 --disable-smb --disable-gopher --disable-dict --disable-file --disable-tftp --disable-rtsp --disable-ldap && \
-        $MAKE
-        result=$?
-        popd > /dev/null
-        return $result
+	cp curlssl.patch curlssl2.patch connectx.patch $1
+	pushd $1 > /dev/null
+	# Patch configure to look for the secure transport framework in the osxcross sdk folder, instead of in /System, which won't actually exist while cross compiling
+	patch configure.ac curlssl.patch
+	patch configure curlssl2.patch
+	# Patch connect.c to disable looking for a certain macOS sdk feature. There's some obscure problem with __builtin_available and I don't know how to solve it
+	patch lib/connect.c connectx.patch
+	CC="$CROSS_BIN_PREFIX"clang CFLAGS="-mmacosx-version-min=10.9" ./configure --host=$HOST --prefix=$CROSS_INSTALL_DIR --with-darwinssl --disable-shared --disable-ftp --disable-telnet --disable-smtp --disable-imap --disable-pop3 --disable-smb --disable-gopher --disable-dict --disable-file --disable-tftp --disable-rtsp --disable-ldap && \
+	$MAKE
+	result=$?
+	popd > /dev/null
+	return $result
 }
 curl_install()
 {
@@ -298,7 +280,7 @@ echo_usage()
     \033[1m"${0}"\033[m make \033[4mLIBRARY_NAME\033[m...
     \033[1msudo "${0}"\033[m install \033[4mLIBRARY_NAME\033[m...
     
-  Valid LIBRARY_NAMEs are: \033[1msdl sdl2 fftw lua lua52 luajit curl\033[m
+  Valid LIBRARY_NAMEs are: \033[1msdl2 fftw lua lua52 luajit curl\033[m
 \n"
 }
 

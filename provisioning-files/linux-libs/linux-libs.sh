@@ -27,7 +27,7 @@
 # GNU General Public License for more details.
 #
 
-MAKE="make -j 2"
+MAKE="make -j 4"
 
 
 
@@ -108,10 +108,10 @@ install_lib()
 	return 0
 }
 
-bzip2_url="https://starcatcher.us/TPT/libs/bzip2-1.0.6.tar.gz"
-bzip2_md5="00b516f4704d4a7cb50a1d97e6e8e15b"
-bzip2_filename="bzip2-1.0.6.tar.gz"
-bzip2_folder="/bzip2-1.0.6"
+bzip2_url="https://starcatcher.us/TPT/libs/bzip2-1.0.8.tar.gz"
+bzip2_md5="67e051268d0c475ea773822f7500d0e5"
+bzip2_filename="bzip2-1.0.8.tar.gz"
+bzip2_folder="/bzip2-1.0.8"
 bzip2_extractfolder="tpt-libs"
 bzip2_compile()
 {
@@ -153,10 +153,10 @@ zlib_install()
 	return $result
 }
 
-fftw_url="http://www.fftw.org/fftw-3.3.3.tar.gz"
-fftw_md5="0a05ca9c7b3bfddc8278e7c40791a1c2"
-fftw_filename="fftw-3.3.3.tar.gz"
-fftw_folder="/fftw-3.3.3"
+fftw_url="http://www.fftw.org/fftw-3.3.8.tar.gz"
+fftw_md5="8aac833c943d8e90d51b697b27d4384d"
+fftw_filename="fftw-3.3.8.tar.gz"
+fftw_folder="/fftw-3.3.8"
 fftw_extractfolder="tpt-libs"
 fftw_compile()
 {
@@ -176,59 +176,10 @@ fftw_install()
 	return $result
 }
 
-x11_url="http://www.x.org/releases/X11R7.7/src/everything/libX11-1.5.0.tar.gz"
-x11_md5="395455e4d3a51459374fe5ca8420aae8"
-x11_filename="libX11-1.5.0.tar.gz"
-x11_folder="/libX11-1.5.0"
-x11_extractfolder="tpt-libs"
-x11_compile()
-{
-	pushd $1 > /dev/null
-	./configure --disable-shared --enable-static --disable-xdmcp && \
-	$MAKE
-	result=$?
-	popd > /dev/null
-	return $result
-}
-x11_install()
-{
-	pushd $1 > /dev/null
-	$MAKE install
-	result=$?
-	popd > /dev/null
-	return $result
-}
-
-sdl_url="http://www.libsdl.org/release/SDL-1.2.15.tar.gz"
-sdl_md5="9d96df8417572a2afb781a7c4c811a85"
-sdl_filename="SDL-1.2.15.tar.gz"
-sdl_folder="/SDL-1.2.15"
-sdl_extractfolder="tpt-libs"
-sdl_compile()
-{
-	lib="sdl"
-	cp x11patch $1
-	pushd $1 > /dev/null
-	git apply x11patch
-	./configure --disable-shared --enable-static --build=`build-scripts/config.guess` && \
-	$MAKE
-	result=$?
-	popd > /dev/null
-	return $result
-}
-sdl_install()
-{
-	pushd $1 > /dev/null
-	$MAKE install
-	result=$?
-	popd > /dev/null
-	return $result
-}
-
-sdl2_url="http://www.libsdl.org/release/SDL2-2.0.9.tar.gz"
-sdl2_md5="f2ecfba915c54f7200f504d8b48a5dfe"
-sdl2_filename="SDL2-2.0.9.tar.gz"
-sdl2_folder="/SDL2-2.0.9"
+sdl2_url="http://www.libsdl.org/release/SDL2-2.0.10.tar.gz"
+sdl2_md5="5a2114f2a6f348bdab5bf52b994811db"
+sdl2_filename="SDL2-2.0.10.tar.gz"
+sdl2_folder="/SDL2-2.0.10"
 sdl2_extractfolder="tpt-libs"
 sdl2_compile()
 {
@@ -250,10 +201,10 @@ sdl2_install()
 	return $result
 }
 
-lua_url="http://www.lua.org/ftp/lua-5.1.4.tar.gz"
-lua_md5="d0870f2de55d59c1c8419f36e8fac150"
-lua_filename="lua-5.1.4.tar.gz"
-lua_folder="/lua-5.1.4"
+lua_url="http://www.lua.org/ftp/lua-5.1.5.tar.gz"
+lua_md5="2e115fe26e435e33b0d5c022e4490567"
+lua_filename="lua-5.1.5.tar.gz"
+lua_folder="/lua-5.1.5"
 lua_extractfolder="tpt-libs"
 lua_compile()
 {
@@ -272,10 +223,10 @@ lua_install()
 	return $result
 }
 
-lua52_url="http://www.lua.org/ftp/lua-5.2.3.tar.gz"
-lua52_md5="dc7f94ec6ff15c985d2d6ad0f1b35654"
-lua52_filename="lua-5.2.3.tar.gz"
-lua52_folder="/lua-5.2.3"
+lua52_url="http://www.lua.org/ftp/lua-5.2.4.tar.gz"
+lua52_md5="913fdb32207046b273fdb17aad70be13"
+lua52_filename="lua-5.2.4.tar.gz"
+lua52_folder="/lua-5.2.4"
 lua52_extractfolder="tpt-libs"
 lua52_compile()
 {
@@ -316,10 +267,10 @@ luajit_install()
 	return $result
 }
 
-curl_url="https://curl.haxx.se/download/curl-7.64.0.tar.gz"
-curl_md5="a026740d599a32bcbbe6e70679397899"
-curl_filename="curl-7.64.0.tar.gz"
-curl_folder="/curl-7.64.0"
+curl_url="https://curl.haxx.se/download/curl-7.68.0.tar.gz"
+curl_md5="f68d6f716ff06d357f476ea4ea57a3d6"
+curl_filename="curl-7.68.0.tar.gz"
+curl_folder="/curl-7.68.0"
 curl_extractfolder="tpt-libs"
 curl_compile()
 {
@@ -351,7 +302,7 @@ echo_usage()
     \033[1m"${0}"\033[m make \033[4mLIBRARY_NAME\033[m...
     \033[1msudo "${0}"\033[m install \033[4mLIBRARY_NAME\033[m...
     
-  Valid LIBRARY_NAMEs are: \033[1mfftw lua lua52 luajit sdl sdl2 curl\033[m
+  Valid LIBRARY_NAMEs are: \033[1mfftw lua lua52 luajit sdl2 curl\033[m
 \n"
 }
 

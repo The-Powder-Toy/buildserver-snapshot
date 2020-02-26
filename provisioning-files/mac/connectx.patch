@@ -1,0 +1,4 @@
+1193c1193
+< #  if defined(HAVE_BUILTIN_AVAILABLE)
+---
+> #  if false
